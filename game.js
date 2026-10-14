@@ -86,7 +86,7 @@ function makeCard(phraseIndex) {
 
   const backArt = document.createElement("img");
   backArt.className = "card-back-art";
-  backArt.src = "/manus-storage/async-images/9NJFvwg6NIBDRl1iX9vfWE/image-2.webp";
+  backArt.src = "./assets/card-seal.webp";
   backArt.alt = "";
   backArt.setAttribute("aria-hidden", "true");
 

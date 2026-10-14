@@ -11,4 +11,5 @@ for (const file of ["index.html", "styles.css", "game.js"]) {
 }
 await cp(path.join(root, "public", "manus-routes.json"), path.join(output, "manus-routes.json"));
 await cp(path.join(root, "logo.svg"), path.join(output, "logo.svg"));
+await cp(path.join(root, "assets"), path.join(output, "assets"), { recursive: true });
 console.log(`Static site built at ${output}`);

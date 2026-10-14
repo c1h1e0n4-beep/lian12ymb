@@ -11,3 +11,9 @@ npm start
 ```
 
 接著前往 `http://localhost:3000`。產生靜態發布檔案可執行 `npm run build`，輸出位置為 `dist/`。
+
+## GitHub 與搬移部署
+
+原始碼與完整圖片素材保存在 [GitHub 私人儲存庫](https://github.com/c1h1e0n4-beep/lian12ymb)。網站是純靜態頁面，不需要資料庫或後端；HTML、樣式、遊戲程式、標誌與圖片都在此專案內，網頁資源使用相對路徑，不依賴 Manus 的儲存網址。可把 `dist/` 目錄中的全部檔案直接上傳至支援靜態網站的協作平台；若平台提供 Git 匯入，也可匯入此儲存庫後執行 `npm run build`。
+
+GitHub Pages 對私人儲存庫的可用性取決於 GitHub 方案；若設定頁要求升級或公開儲存庫，請勿在未確認原始碼可公開前變更可見度。

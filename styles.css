@@ -37,7 +37,7 @@ main { width: min(1160px, calc(100% - 56px)); margin: 0 auto; min-height: calc(1
 @keyframes page-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 .start-screen { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(330px, .92fr); min-height: 580px; align-items: center; padding: 46px 0; }
-.hero-landscape { position: absolute; left: 0; right: 0; top: 10px; height: 490px; background-image: linear-gradient(90deg, rgba(240, 243, 232, .84) 0%, rgba(241, 243, 233, .28) 49%, rgba(241, 243, 233, .08) 100%), linear-gradient(180deg, rgba(241, 243, 233, .1), #eef1e7 96%), url("/manus-storage/async-images/9NJFvwg6NIBDRl1iX9vfWE/image-1.webp"); background-size: cover; background-position: center 54%; opacity: .83; pointer-events: none; }
+.hero-landscape { position: absolute; left: 0; right: 0; top: 10px; height: 490px; background-image: linear-gradient(90deg, rgba(240, 243, 232, .84) 0%, rgba(241, 243, 233, .28) 49%, rgba(241, 243, 233, .08) 100%), linear-gradient(180deg, rgba(241, 243, 233, .1), #eef1e7 96%), url("assets/fuchun-landscape.webp"); background-size: cover; background-position: center 54%; opacity: .83; pointer-events: none; }
 .hero-copy { z-index: 1; position: relative; padding: 58px 0 50px 7%; }
 .eyebrow { display: flex; align-items: center; gap: 11px; margin: 0 0 20px; color: #738078; font-size: 12px; font-weight: 500; letter-spacing: .23em; }
 .eyebrow-line { width: 28px; height: 1px; display: inline-block; background: var(--gold); }
@@ -56,7 +56,7 @@ h1, h2, p { margin-top: 0; }
 .caption-rule { width: 1px; height: 58px; background: linear-gradient(180deg, transparent, rgba(179,146,89,.8), transparent); }
 
 .game-screen { padding: 22px 0 36px; max-width: 970px; margin: 0 auto; }
-.game-landscape { position: absolute; z-index: -1; top: -10px; left: -5%; width: 110%; height: 250px; background-image: linear-gradient(180deg, rgba(241,243,233,.08), rgba(241,243,233,.76) 86%, #eef1e7), url("/manus-storage/async-images/9NJFvwg6NIBDRl1iX9vfWE/image-1.webp"); background-size: cover; background-position: center 43%; opacity: .52; pointer-events: none; }
+.game-landscape { position: absolute; z-index: -1; top: -10px; left: -5%; width: 110%; height: 250px; background-image: linear-gradient(180deg, rgba(241,243,233,.08), rgba(241,243,233,.76) 86%, #eef1e7), url("assets/fuchun-landscape.webp"); background-size: cover; background-position: center 43%; opacity: .52; pointer-events: none; }
 .game-heading-row { position: relative; display: flex; align-items: end; justify-content: space-between; gap: 20px; padding: 0 12px 18px; }
 .game-heading-row .eyebrow { margin-bottom: 8px; font-size: 10px; }
 .game-heading-row h1 { font-size: clamp(24px, 3.2vw, 37px); letter-spacing: .14em; }
@@ -111,7 +111,7 @@ h1, h2, p { margin-top: 0; }
 .round-toast.is-visible { opacity: 1; }
 
 .result-screen { max-width: 700px; margin: 0 auto; padding: 42px 24px 50px; text-align: center; }
-.result-landscape { z-index: -1; position: absolute; inset: -20px -15% auto; height: 300px; background-image: linear-gradient(180deg, rgba(239,242,231,.08), rgba(239,242,231,.9) 87%), url("/manus-storage/async-images/9NJFvwg6NIBDRl1iX9vfWE/image-1.webp"); background-size: cover; background-position: center 53%; opacity: .48; }
+.result-landscape { z-index: -1; position: absolute; inset: -20px -15% auto; height: 300px; background-image: linear-gradient(180deg, rgba(239,242,231,.08), rgba(239,242,231,.9) 87%), url("assets/fuchun-landscape.webp"); background-size: cover; background-position: center 53%; opacity: .48; }
 .result-screen > .eyebrow { justify-content: center; margin-bottom: 10px; }
 .result-seal { display: grid; place-items: center; width: 47px; height: 47px; margin: 0 auto 12px; border: 1px solid rgba(154,105,80,.59); color: #9a6950; font-size: 22px; background: rgba(246,239,220,.7); }
 .result-screen h1 { font-size: clamp(30px, 4.4vw, 45px); letter-spacing: .19em; }
@@ -134,7 +134,7 @@ h1, h2, p { margin-top: 0; }
   .header-note { font-size: 10px; letter-spacing: .11em; }
   main { width: calc(100% - 28px); min-height: calc(100svh - 122px); }
   .start-screen { grid-template-columns: 1fr; min-height: 590px; padding: 32px 0; align-items: center; }
-  .hero-landscape { top: 0; height: 420px; background-position: 56% center; background-image: linear-gradient(90deg, rgba(240,243,232,.78), rgba(241,243,233,.28)), linear-gradient(180deg, rgba(241,243,233,.04), #eef1e7 96%), url("/manus-storage/async-images/9NJFvwg6NIBDRl1iX9vfWE/image-1.webp"); }
+  .hero-landscape { top: 0; height: 420px; background-position: 56% center; background-image: linear-gradient(90deg, rgba(240,243,232,.78), rgba(241,243,233,.28)), linear-gradient(180deg, rgba(241,243,233,.04), #eef1e7 96%), url("assets/fuchun-landscape.webp"); }
   .hero-copy { padding: 55px 8px 65px; }
   .hero-copy h1 { font-size: clamp(34px, 9vw, 49px); letter-spacing: .09em; }
   .hero-subtitle { font-size: 16px; }
