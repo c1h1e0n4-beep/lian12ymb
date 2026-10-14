@@ -14,7 +14,6 @@ const startScreen = $("start-screen");
 const gameScreen = $("game-screen");
 const resultScreen = $("result-screen");
 const cardGrid = $("card-grid");
-const targetPhrase = $("target-phrase");
 const targetNote = $("target-note");
 const roundNumber = $("round-number");
 const lapTimer = $("lap-timer");
@@ -85,16 +84,17 @@ function makeCard(phraseIndex) {
   card.setAttribute("aria-pressed", "false");
   card.dataset.phraseIndex = String(phraseIndex);
 
-  const backLabel = document.createElement("span");
-  backLabel.className = "card-back-label";
-  backLabel.setAttribute("aria-hidden", "true");
-  backLabel.textContent = "文脈";
+  const backArt = document.createElement("img");
+  backArt.className = "card-back-art";
+  backArt.src = "/manus-storage/async-images/9NJFvwg6NIBDRl1iX9vfWE/image-2.webp";
+  backArt.alt = "";
+  backArt.setAttribute("aria-hidden", "true");
 
   const text = document.createElement("span");
   text.className = "card-face-text";
   text.textContent = PHRASES[phraseIndex];
 
-  card.append(backLabel, text);
+  card.append(backArt, text);
   card.addEventListener("click", () => chooseCard(card, phraseIndex));
   return card;
 }
@@ -111,9 +111,8 @@ function beginRound(roundNumberValue) {
   round = roundNumberValue;
   nextPhraseIndex = 0;
   roundNumber.textContent = String(round);
-  targetPhrase.textContent = PHRASES[0];
-  targetNote.textContent = "翻開一張牌，接續展卷。";
-  gameInstruction.innerHTML = '<span class="instruction-dot"></span>依文句先後翻牌；若翻錯，卡牌會停留兩秒再覆回。';
+  targetNote.textContent = "請憑記憶依序翻牌，遊戲不顯示待尋文句。";
+  gameInstruction.innerHTML = '<span class="instruction-dot"></span>依課文記憶循序翻牌；翻錯的卡牌會停留兩秒再覆回。';
   roundToast.classList.remove("is-visible");
   buildBoard();
   updateProgress();
@@ -137,8 +136,7 @@ function chooseCard(card, phraseIndex) {
     updateProgress();
 
     if (nextPhraseIndex < PHRASES.length) {
-      targetPhrase.textContent = PHRASES[nextPhraseIndex];
-      targetNote.textContent = "很好，沿著下一句繼續。";
+      targetNote.textContent = "次序正確，請繼續憑記憶展卷。";
       return;
     }
 
@@ -159,7 +157,7 @@ function chooseCard(card, phraseIndex) {
     card.disabled = false;
     phase = "playing";
     setUnrevealedCardsEnabled(true);
-    targetNote.textContent = "請尋找下一句，循文接續展卷。";
+    targetNote.textContent = "卡牌已覆回，請憑記憶繼續。";
     gameInstruction.innerHTML = '<span class="instruction-dot"></span>依文句先後翻牌；若翻錯，卡牌會停留兩秒再覆回。';
     revealTimeout = null;
   }, WRONG_REVEAL_MS);
@@ -172,7 +170,6 @@ function finishRound() {
   roundTimes.push(roundTime);
   renderTimers();
   lapTimer.textContent = formatSeconds(roundTime);
-  targetPhrase.textContent = "全篇展卷完成";
 
   if (round < MAX_ROUNDS) {
     targetNote.textContent = `第 ${round} 輪已成，下一卷即刻展開。`;
