@@ -31,15 +31,15 @@ let roundStartedAt = 0;
 let roundTimes = [];
 let previousArrangement = null;
 let timerInterval = null;
-let revealTimeout = null;
 let roundTimeout = null;
+const pendingWrongCardTimers = new Map();
 
 function formatSeconds(milliseconds) {
   return (milliseconds / 1000).toFixed(1);
 }
 
 function elapsedThisRound() {
-  return phase === "playing" || phase === "mistake" ? performance.now() - roundStartedAt : 0;
+  return phase === "playing" ? performance.now() - roundStartedAt : 0;
 }
 
 function renderTimers() {
@@ -64,10 +64,9 @@ function shuffleIndices() {
   return shuffled;
 }
 
-function setUnrevealedCardsEnabled(enabled) {
-  cardGrid.querySelectorAll(".study-card:not(.is-locked)").forEach((card) => {
-    if (!card.classList.contains("is-mistake")) card.disabled = !enabled;
-  });
+function clearPendingWrongCardTimers() {
+  pendingWrongCardTimers.forEach((timeoutId) => window.clearTimeout(timeoutId));
+  pendingWrongCardTimers.clear();
 }
 
 function updateProgress() {
@@ -107,12 +106,13 @@ function buildBoard() {
 }
 
 function beginRound(roundNumberValue) {
+  clearPendingWrongCardTimers();
   phase = "playing";
   round = roundNumberValue;
   nextPhraseIndex = 0;
   roundNumber.textContent = String(round);
-  targetNote.textContent = "請憑記憶依序翻牌，遊戲不顯示待尋文句。";
-  gameInstruction.innerHTML = '<span class="instruction-dot"></span>依課文記憶循序翻牌；翻錯的卡牌會停留兩秒再覆回。';
+  targetNote.textContent = "";
+  gameInstruction.innerHTML = '<span class="instruction-dot"></span>錯誤卡牌兩秒後覆回；其他卡牌可繼續翻。';
   roundToast.classList.remove("is-visible");
   buildBoard();
   updateProgress();
@@ -146,21 +146,20 @@ function chooseCard(card, phraseIndex) {
 
   card.classList.add("is-mistake");
   card.disabled = true;
-  phase = "mistake";
-  setUnrevealedCardsEnabled(false);
   targetNote.textContent = "句序未合，兩秒後覆卷再試。";
-  gameInstruction.innerHTML = '<span class="instruction-dot"></span>這句不在當前位置，請記住順序，稍候再試。';
-  revealTimeout = window.setTimeout(() => {
+  const revealTimeoutId = window.setTimeout(() => {
     card.classList.remove("is-flipped", "is-mistake");
     card.setAttribute("aria-pressed", "false");
     card.setAttribute("aria-label", "尚未翻開的文句卡");
     card.disabled = false;
-    phase = "playing";
-    setUnrevealedCardsEnabled(true);
-    targetNote.textContent = "卡牌已覆回，請憑記憶繼續。";
-    gameInstruction.innerHTML = '<span class="instruction-dot"></span>依文句先後翻牌；若翻錯，卡牌會停留兩秒再覆回。';
-    revealTimeout = null;
+    pendingWrongCardTimers.delete(card);
+    if (phase === "playing") {
+      targetNote.textContent = pendingWrongCardTimers.size
+        ? `還有 ${pendingWrongCardTimers.size} 張錯誤卡牌正在覆回。`
+        : "卡牌已覆回。";
+    }
   }, WRONG_REVEAL_MS);
+  pendingWrongCardTimers.set(card, revealTimeoutId);
 }
 
 function finishRound() {
@@ -208,7 +207,6 @@ function showResults() {
 
 function startNewGame() {
   clearInterval(timerInterval);
-  clearTimeout(revealTimeout);
   clearTimeout(roundTimeout);
   roundTimes = [];
   round = 1;

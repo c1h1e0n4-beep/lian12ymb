@@ -79,6 +79,7 @@ h1, h2, p { margin-top: 0; }
 .target-kicker { color: #898b79; font-size: 11px; letter-spacing: .13em; white-space: nowrap; }
 .target-phrase { color: #3c6856; font-size: clamp(21px, 3vw, 29px); letter-spacing: .18em; font-weight: 600; min-width: 164px; text-shadow: 0 1px rgba(255,255,255,.7); }
 .target-note { margin-left: auto; color: #8a9286; font-size: 11px; letter-spacing: .09em; text-align: right; }
+.target-note:empty { display: none; }
 .board-wrap { position: relative; padding: 20px 56px; border: 1px solid rgba(151,159,131,.42); background: rgba(248,248,239,.65); box-shadow: var(--shadow); }
 .board-wrap::before, .board-wrap::after { content: ""; position: absolute; pointer-events: none; z-index: 0; left: 23px; right: 23px; height: 1px; background: linear-gradient(90deg, transparent, rgba(179,146,89,.44) 12%, rgba(179,146,89,.44) 88%, transparent); }
 .board-wrap::before { top: 8px; }.board-wrap::after { bottom: 8px; }
