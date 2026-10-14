@@ -1,0 +1,11 @@
+{
+  "name": "lian12ymb",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "連‧十二步成文｜山水文脈接力遊戲網站",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build.mjs"
+  }
+}

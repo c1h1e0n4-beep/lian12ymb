@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#edf1e7" />
+    <meta name="description" content="以十二步文句接力，讀入《與朱元思書》的山水文脈。" />
+    <title>連‧十二步成文｜山水文脈接力</title>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/game.js" defer></script>
+  </head>
+  <body>
+    <div class="paper-grain" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="連‧十二步成文首頁">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="/manus-storage/async-images/9NJFvwg6NIBDRl1iX9vfWE/image-2.webp" alt="" />
+        </span>
+        <span class="brand-name">連‧十二步成文</span>
+      </a>
+      <span class="header-note"><span class="header-seal">文</span> 山水文脈接力</span>
+    </header>
+
+    <main>
+      <section class="start-screen screen" id="start-screen" aria-labelledby="hero-title">
+        <div class="hero-landscape" role="img" aria-label="淡彩水墨山巒、蜿蜒江河與遠方舟影"></div>
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span>《與朱元思書》・文句接力</p>
+          <h1 id="hero-title">連‧十二步成文</h1>
+          <p class="hero-subtitle">循著文脈，走入山水之間。</p>
+          <p class="hero-description">十二句散落卷中，依序尋字、逐句展卷。<br />五輪接力，看看誰能一氣呵成。</p>
+          <button class="primary-button" id="start-button" type="button">
+            <span>開始</span><span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+          <div class="hero-footnote"><span>十二句</span><i></i><span>五輪接力</span><i></i><span>依序翻牌</span></div>
+        </div>
+        <div class="hero-caption" aria-hidden="true"><span>富春・文脈行旅</span><span class="caption-rule"></span><span>一頁山水　一卷文章</span></div>
+      </section>
+
+      <section class="game-screen screen is-hidden" id="game-screen" aria-labelledby="game-heading">
+        <div class="game-landscape" aria-hidden="true"></div>
+        <div class="game-heading-row">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span>《與朱元思書》・依序尋句</p>
+            <h1 id="game-heading">連‧十二步成文</h1>
+          </div>
+          <div class="round-ribbon" aria-live="polite"><span class="ribbon-small">接力輪次</span><span>第 <strong id="round-number">1</strong> 輪 <i>/</i> 5</span></div>
+        </div>
+
+        <div class="score-strip" aria-label="遊戲計時資訊">
+          <div class="score-item"><span class="score-label">本輪用時</span><strong id="lap-timer">0.0</strong><span class="score-unit">秒</span></div>
+          <span class="score-divider" aria-hidden="true"></span>
+          <div class="score-item"><span class="score-label">五輪累計</span><strong id="total-timer">0.0</strong><span class="score-unit">秒</span></div>
+          <span class="score-divider score-divider-progress" aria-hidden="true"></span>
+          <div class="progress-item"><span class="score-label">文脈進度</span><div class="progress-track" role="progressbar" aria-label="本輪文句進度" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" id="progress-track"><span id="progress-fill"></span></div><span class="progress-count" id="progress-count">0 / 12</span></div>
+        </div>
+
+        <div class="target-panel" aria-live="polite" aria-atomic="true">
+          <span class="target-kicker">下一句・請尋此句</span>
+          <strong class="target-phrase" id="target-phrase">水皆縹碧</strong>
+          <span class="target-note" id="target-note">翻開一張牌，接續展卷。</span>
+        </div>
+
+        <div class="board-wrap">
+          <div class="board-ornament board-ornament-left" aria-hidden="true">山</div>
+          <div class="card-grid" id="card-grid" aria-label="十二張文句卡牌"></div>
+          <div class="board-ornament board-ornament-right" aria-hidden="true">水</div>
+        </div>
+        <p class="game-instruction" id="game-instruction"><span class="instruction-dot"></span>依文句先後翻牌；若翻錯，卡牌會停留兩秒再覆回。</p>
+        <div class="round-toast" id="round-toast" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="result-screen screen is-hidden" id="result-screen" aria-labelledby="result-heading">
+        <div class="result-landscape" aria-hidden="true"></div>
+        <p class="eyebrow"><span class="eyebrow-line"></span>一卷讀畢・五輪完賽</p>
+        <div class="result-seal" aria-hidden="true">成</div>
+        <h1 id="result-heading">五輪全篇展卷</h1>
+        <p class="result-subtitle">文脈相承，山水入心。</p>
+        <div class="result-panel">
+          <h2>各輪用時</h2>
+          <ol class="lap-results" id="lap-results"></ol>
+          <div class="total-result"><span>總用時</span><strong id="final-total">0.0 秒</strong></div>
+        </div>
+        <button class="primary-button result-button" id="replay-button" type="button"><span>再啟一局</span><span class="button-arrow" aria-hidden="true">↻</span></button>
+      </section>
+    </main>
+
+    <footer class="site-footer"><span>讀《與朱元思書》・循文而行</span><span class="footer-dot">・</span><span>一字一景，一句一程</span></footer>
+  </body>
+</html>
