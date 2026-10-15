@@ -125,6 +125,8 @@ h1, h2, p { margin-top: 0; }
 .lap-results li strong { color: #426a58; font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; }
 .total-result { display: flex; justify-content: space-between; align-items: baseline; margin-top: 12px; color: #4d6759; font-size: 14px; letter-spacing: .13em; }
 .total-result strong { color: #9a7342; font-size: 21px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.completion-status { margin: 14px 0 0; padding: 10px 12px; border: 1px solid rgba(79,118,106,.3); background: rgba(227,236,226,.58); color: #426a58; text-align: center; font-size: 12px; letter-spacing: .08em; line-height: 1.8; }
+.completion-status.is-overtime { border-color: rgba(154,105,80,.36); background: rgba(246,239,220,.56); color: #8c634a; }
 .result-button { margin-top: 20px; }
 
 .site-footer { width: min(1160px, calc(100% - 56px)); min-height: 58px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 12px; color: #92998c; font-size: 10px; letter-spacing: .16em; }
@@ -169,6 +171,7 @@ h1, h2, p { margin-top: 0; }
   .game-instruction { margin-top: 11px; font-size: 10px; line-height: 1.8; }
   .result-screen { padding: 34px 6px 38px; }
   .result-panel { padding: 17px 19px 14px; }
+  .completion-status { font-size: 11px; }
   .site-footer { width: calc(100% - 28px); font-size: 9px; letter-spacing: .08em; gap: 7px; }
 }
 

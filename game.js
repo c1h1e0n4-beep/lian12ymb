@@ -8,6 +8,7 @@ const PHRASES = [
 const MAX_ROUNDS = 5;
 const WRONG_REVEAL_MS = 1000;
 const ROUND_PAUSE_MS = 1250;
+const TIME_LIMIT_MS = 8 * 60 * 1000;
 
 const $ = (id) => document.getElementById(id);
 const startScreen = $("start-screen");
@@ -212,6 +213,14 @@ function showResults() {
   });
   const total = roundTimes.reduce((sum, time) => sum + time, 0);
   $("final-total").textContent = `${formatSeconds(total)} 秒`;
+  const completionStatus = $("completion-status");
+  if (total <= TIME_LIMIT_MS) {
+    completionStatus.textContent = "限時內完成・可列入完成組別";
+    completionStatus.classList.remove("is-overtime");
+  } else {
+    completionStatus.textContent = "超過八分鐘・仍記錄實際用時，不列入限時完成組別";
+    completionStatus.classList.add("is-overtime");
+  }
 }
 
 function startNewGame() {
