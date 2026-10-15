@@ -6,7 +6,7 @@ const PHRASES = [
   "負勢競上", "互相軒邈", "爭高直指", "千百成峰"
 ];
 const MAX_ROUNDS = 5;
-const WRONG_REVEAL_MS = 1500;
+const WRONG_REVEAL_MS = 1000;
 const ROUND_PAUSE_MS = 1250;
 
 const $ = (id) => document.getElementById(id);
@@ -121,7 +121,7 @@ function beginRound(roundNumberValue) {
   nextPhraseIndex = 0;
   roundNumber.textContent = String(round);
   targetNote.textContent = "";
-  gameInstruction.innerHTML = '<span class="instruction-dot"></span>錯牌顯示 1.5 秒後覆回；期間暫停其他翻牌。';
+  gameInstruction.innerHTML = '<span class="instruction-dot"></span>錯牌顯示 1 秒後覆回；期間暫停其他翻牌。';
   roundToast.classList.remove("is-visible");
   buildBoard();
   updateProgress();
@@ -156,7 +156,7 @@ function chooseCard(card, phraseIndex) {
   card.classList.add("is-mistake");
   card.disabled = true;
   setUnrevealedCardsDisabled(true);
-  targetNote.textContent = "句序未合，1.5 秒後再試。";
+  targetNote.textContent = "句序未合，1 秒後再試。";
   const revealTimeoutId = window.setTimeout(() => {
     card.classList.remove("is-flipped", "is-mistake");
     card.setAttribute("aria-pressed", "false");
