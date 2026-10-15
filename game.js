@@ -35,8 +35,11 @@ let timerInterval = null;
 let roundTimeout = null;
 const pendingWrongCardTimers = new Map();
 
-function formatSeconds(milliseconds) {
-  return (milliseconds / 1000).toFixed(1);
+function formatDuration(milliseconds) {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }
 
 function elapsedThisRound() {
@@ -46,8 +49,8 @@ function elapsedThisRound() {
 function renderTimers() {
   const current = elapsedThisRound();
   const completed = roundTimes.reduce((sum, time) => sum + time, 0);
-  lapTimer.textContent = formatSeconds(current);
-  totalTimer.textContent = formatSeconds(completed + current);
+  lapTimer.textContent = formatDuration(current);
+  totalTimer.textContent = formatDuration(completed + current);
 }
 
 function shuffleIndices() {
@@ -178,11 +181,11 @@ function finishRound() {
   const roundTime = performance.now() - roundStartedAt;
   roundTimes.push(roundTime);
   renderTimers();
-  lapTimer.textContent = formatSeconds(roundTime);
+  lapTimer.textContent = formatDuration(roundTime);
 
   if (round < MAX_ROUNDS) {
     targetNote.textContent = `第 ${round} 輪已成，下一卷即刻展開。`;
-    roundToast.textContent = `第 ${round} 輪完成・${formatSeconds(roundTime)} 秒`;
+    roundToast.textContent = `第 ${round} 輪完成・${formatDuration(roundTime)}`;
     roundToast.classList.add("is-visible");
     roundTimeout = window.setTimeout(() => beginRound(round + 1), ROUND_PAUSE_MS);
     return;
@@ -207,12 +210,12 @@ function showResults() {
     const label = document.createElement("span");
     const result = document.createElement("strong");
     label.textContent = `第 ${index + 1} 輪`;
-    result.textContent = `${formatSeconds(time)} 秒`;
+    result.textContent = formatDuration(time);
     row.append(label, result);
     list.append(row);
   });
   const total = roundTimes.reduce((sum, time) => sum + time, 0);
-  $("final-total").textContent = `${formatSeconds(total)} 秒`;
+  $("final-total").textContent = formatDuration(total);
   const completionStatus = $("completion-status");
   if (total <= TIME_LIMIT_MS) {
     completionStatus.textContent = "限時內完成・可列入完成組別";
@@ -229,8 +232,8 @@ function startNewGame() {
   roundTimes = [];
   round = 1;
   nextPhraseIndex = 0;
-  lapTimer.textContent = "0.0";
-  totalTimer.textContent = "0.0";
+  lapTimer.textContent = "0:00";
+  totalTimer.textContent = "0:00";
   resultScreen.classList.add("is-hidden");
   startScreen.classList.add("is-hidden");
   gameScreen.classList.remove("is-hidden");
