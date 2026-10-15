@@ -104,6 +104,7 @@ h1, h2, p { margin-top: 0; }
 .study-card.is-mistake .card-face-text { color: #915b49; }
 @keyframes mistake-waver { 25% { transform: translateX(-3px); } 65% { transform: translateX(3px); } }
 .study-card:disabled { opacity: 1; }
+.study-card:disabled:not(.is-locked):not(.is-mistake) { opacity: .62; cursor: wait; }
 .board-ornament { position: absolute; top: 50%; color: rgba(119,139,119,.47); font-size: 14px; letter-spacing: .3em; writing-mode: vertical-rl; transform: translateY(-50%); }
 .board-ornament-left { left: 19px; }.board-ornament-right { right: 19px; }
 .game-instruction { margin: 13px 0 0; text-align: center; color: #879086; font-size: 11px; letter-spacing: .08em; }

@@ -6,7 +6,7 @@ const PHRASES = [
   "負勢競上", "互相軒邈", "爭高直指", "千百成峰"
 ];
 const MAX_ROUNDS = 5;
-const WRONG_REVEAL_MS = 2000;
+const WRONG_REVEAL_MS = 1500;
 const ROUND_PAUSE_MS = 1250;
 
 const $ = (id) => document.getElementById(id);
@@ -69,6 +69,14 @@ function clearPendingWrongCardTimers() {
   pendingWrongCardTimers.clear();
 }
 
+function setUnrevealedCardsDisabled(disabled) {
+  cardGrid.querySelectorAll(".study-card:not(.is-flipped)").forEach((card) => {
+    card.disabled = disabled;
+  });
+  if (disabled) cardGrid.setAttribute("aria-busy", "true");
+  else cardGrid.removeAttribute("aria-busy");
+}
+
 function updateProgress() {
   progressCount.textContent = `${nextPhraseIndex} / ${PHRASES.length}`;
   progressTrack.setAttribute("aria-valuenow", String(nextPhraseIndex));
@@ -99,6 +107,7 @@ function makeCard(phraseIndex) {
 }
 
 function buildBoard() {
+  cardGrid.removeAttribute("aria-busy");
   cardGrid.replaceChildren();
   const fragment = document.createDocumentFragment();
   shuffleIndices().forEach((phraseIndex) => fragment.append(makeCard(phraseIndex)));
@@ -112,7 +121,7 @@ function beginRound(roundNumberValue) {
   nextPhraseIndex = 0;
   roundNumber.textContent = String(round);
   targetNote.textContent = "";
-  gameInstruction.innerHTML = '<span class="instruction-dot"></span>錯誤卡牌兩秒後覆回；其他卡牌可繼續翻。';
+  gameInstruction.innerHTML = '<span class="instruction-dot"></span>錯牌顯示 1.5 秒後覆回；期間暫停其他翻牌。';
   roundToast.classList.remove("is-visible");
   buildBoard();
   updateProgress();
@@ -136,7 +145,7 @@ function chooseCard(card, phraseIndex) {
     updateProgress();
 
     if (nextPhraseIndex < PHRASES.length) {
-      targetNote.textContent = "次序正確，請繼續憑記憶展卷。";
+      targetNote.textContent = "次序正確。";
       return;
     }
 
@@ -146,7 +155,8 @@ function chooseCard(card, phraseIndex) {
 
   card.classList.add("is-mistake");
   card.disabled = true;
-  targetNote.textContent = "句序未合，兩秒後覆卷再試。";
+  setUnrevealedCardsDisabled(true);
+  targetNote.textContent = "句序未合，1.5 秒後再試。";
   const revealTimeoutId = window.setTimeout(() => {
     card.classList.remove("is-flipped", "is-mistake");
     card.setAttribute("aria-pressed", "false");
@@ -154,9 +164,8 @@ function chooseCard(card, phraseIndex) {
     card.disabled = false;
     pendingWrongCardTimers.delete(card);
     if (phase === "playing") {
-      targetNote.textContent = pendingWrongCardTimers.size
-        ? `還有 ${pendingWrongCardTimers.size} 張錯誤卡牌正在覆回。`
-        : "卡牌已覆回。";
+      setUnrevealedCardsDisabled(false);
+      targetNote.textContent = "卡牌已覆回。";
     }
   }, WRONG_REVEAL_MS);
   pendingWrongCardTimers.set(card, revealTimeoutId);
