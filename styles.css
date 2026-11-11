@@ -105,9 +105,6 @@ h1, h2, p { margin-top: 0; }
 .board-ornament-left { left: 19px; }.board-ornament-right { right: 19px; }
 .game-instruction { margin: 13px 0 0; text-align: center; color: #879086; font-size: 11px; letter-spacing: .08em; }
 .instruction-dot { display: inline-block; width: 5px; height: 5px; margin: 0 8px 2px 0; border-radius: 50%; background: #b39259; }
-.round-toast { position: fixed; z-index: 10; top: 45%; left: 50%; transform: translate(-50%, -50%); padding: 16px 30px; border: 1px solid rgba(179,146,89,.7); background: rgba(249,248,238,.95); color: #466757; font-size: 19px; letter-spacing: .2em; box-shadow: 0 10px 40px rgba(55,76,64,.15); opacity: 0; pointer-events: none; transition: opacity .22s ease; }
-.round-toast.is-visible { opacity: 1; }
-
 .result-screen { max-width: 700px; margin: 0 auto; padding: 42px 24px 50px; text-align: center; }
 .result-landscape { z-index: -1; position: absolute; inset: -20px -15% auto; height: 300px; background-image: linear-gradient(180deg, rgba(239,242,231,.08), rgba(239,242,231,.9) 87%), url("assets/fuchun-landscape.webp"); background-size: cover; background-position: center 53%; opacity: .48; }
 .result-screen > .eyebrow { justify-content: center; margin-bottom: 10px; }
@@ -116,13 +113,8 @@ h1, h2, p { margin-top: 0; }
 .result-subtitle { margin: 8px 0 20px; color: #748177; font-size: 13px; letter-spacing: .17em; }
 .result-panel { max-width: 480px; margin: 0 auto; padding: 21px 28px 17px; text-align: left; border: 1px solid rgba(179,146,89,.52); background: rgba(250,249,241,.87); box-shadow: var(--shadow), inset 0 0 0 4px rgba(255,255,255,.48); }
 .result-panel h2 { margin: 0 0 10px; color: #62786a; font-size: 12px; font-weight: 500; letter-spacing: .22em; }
-.lap-results { list-style: none; margin: 0; padding: 0; }
-.lap-results li { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(148,157,135,.19); color: #718076; font-size: 13px; letter-spacing: .07em; }
-.lap-results li strong { color: #426a58; font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; }
 .total-result { display: flex; justify-content: space-between; align-items: baseline; margin-top: 12px; color: #4d6759; font-size: 14px; letter-spacing: .13em; }
 .total-result strong { color: #9a7342; font-size: 21px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.completion-status { margin: 14px 0 0; padding: 10px 12px; border: 1px solid rgba(79,118,106,.3); background: rgba(227,236,226,.58); color: #426a58; text-align: center; font-size: 12px; letter-spacing: .08em; line-height: 1.8; }
-.completion-status.is-overtime { border-color: rgba(154,105,80,.36); background: rgba(246,239,220,.56); color: #8c634a; }
 .result-button { margin-top: 20px; }
 
 .site-footer { width: min(1160px, calc(100% - 56px)); min-height: 58px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 12px; color: #92998c; font-size: 10px; letter-spacing: .16em; }
@@ -165,7 +157,6 @@ h1, h2, p { margin-top: 0; }
   .game-instruction { margin-top: 11px; font-size: 10px; line-height: 1.8; }
   .result-screen { padding: 34px 6px 38px; }
   .result-panel { padding: 17px 19px 14px; }
-  .completion-status { font-size: 11px; }
   .site-footer { width: calc(100% - 28px); font-size: 9px; letter-spacing: .08em; gap: 7px; }
 }
 

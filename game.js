@@ -6,7 +6,7 @@ const PHRASES = [
   "負勢競上", "互相軒邈", "爭高直指", "千百成峰"
 ];
 const WRONG_REVEAL_MS = 1000;
-const TIME_LIMIT_MS = 8 * 60 * 1000;
+const COUNTDOWN_MS = 2 * 60 * 1000;
 
 const $ = (id) => document.getElementById(id);
 const startScreen = $("start-screen");
@@ -39,7 +39,12 @@ function elapsedGame() {
 }
 
 function renderTimer() {
-  lapTimer.textContent = formatDuration(elapsedGame());
+  const remaining = Math.max(0, COUNTDOWN_MS - elapsedGame());
+  lapTimer.textContent = formatDuration(remaining);
+  if (remaining === 0 && timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
 }
 
 function shuffleIndices() {
@@ -174,25 +179,8 @@ function showResults() {
   gameScreen.classList.add("is-hidden");
   resultScreen.classList.remove("is-hidden");
 
-  const list = $("lap-results");
-  list.replaceChildren();
-  const row = document.createElement("li");
-  const label = document.createElement("span");
-  const result = document.createElement("strong");
-  label.textContent = "本局完成時間";
-  result.textContent = formatDuration(finalElapsed);
-  row.append(label, result);
-  list.append(row);
   $("final-total").textContent = formatDuration(finalElapsed);
 
-  const completionStatus = $("completion-status");
-  if (finalElapsed <= TIME_LIMIT_MS) {
-    completionStatus.textContent = "八分鐘內完成・可列入完成組別";
-    completionStatus.classList.remove("is-overtime");
-  } else {
-    completionStatus.textContent = "超過八分鐘・仍記錄本局實際用時";
-    completionStatus.classList.add("is-overtime");
-  }
 }
 
 $("start-button").addEventListener("click", startNewGame);
